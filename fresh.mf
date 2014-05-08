@@ -1,0 +1,183 @@
+%%% ====================================================================
+%%%  @METAFONT-file{
+%%%     author-1        = "Keith Wansbrough",
+%%%     version         = "1.0",
+%%%     date            = "05 June 2001",
+%%%     time            = "17:00:00 BST",
+%%%     filename        = "fresh.mf",
+%%%     address-1       = "Computer Laboratory
+%%%                        University of Cambridge
+%%%                        New Museums Site
+%%%                        Cambridge CB2 3QG
+%%%                        United Kingdom",
+%%%     telephone-1     = "+44 1223 334 600 x 34608",
+%%%     checksum        = "",
+%%%     email-1         = "kw217@cl.cam.ac.uk",
+%%%     codetable       = "ISO/ASCII",
+%%%     keywords        = "metafont symbols fresh quantifier apartness freshness",
+%%%     supported       = "yes",
+%%%     abstract        = "This is part of the metafont program for
+%%%                        the freshness symbol font.",
+%%%     docstring       = "This is part of the metafont program for
+%%%                        the freshness symbol font.  The font
+%%%                        contains mathematical characters necessary
+%%%                        for working with the freshness notion of
+%%%                        Jamie Gabbay and Andrew Pitts.
+%%%
+%%%                        Copyright 2001 Keith Wansbrough.
+%%%
+%%%                        The checksum field above contains a CRC-16
+%%%                        checksum as the first value, followed by the
+%%%                        equivalent of the standard UNIX wc (word
+%%%                        count) utility output of lines, words, and
+%%%                        characters.  This is produced by Robert
+%%%                        Solovay's checksum utility.",
+%%%     package         = "Freshness",
+%%%  }
+%%% ====================================================================
+%%%
+%%% 05 Jun 2001, v1.0: Created the font.
+
+% This is the driver file for the freshness symbol font.  The symbols
+% are intended for use with the freshness notion of Jamie Gabbay and
+% Andrew Pitts.
+%
+% We assume the parameters have been set by whichever file called us
+% (for example fresh10.mf).
+
+mode_setup; font_setup;
+autorounding:=0;
+
+font_slant slant; font_x_height x_height#;
+font_quad 18u# if not monospace:+4letter_fit# fi;
+slant:=mono_charic#:=0;  % the remaining characters will not be slanted
+
+
+% FRESHNESS QUANTIFIER.  Based on for_all, there_exists in Computer Modern's sym.mf.
+%
+cmchar "The freshness quantifier";
+beginchar(oct"101",10u#,asc_height#,0);
+italcorr asc_height#*slant;
+adjust_fit(0,0); pickup rule.nib;
+lft x1=hround u-eps; x3=w-x1; x1=x2; x3=x4;
+top y1=h; bot y2=0; y3=y1; y4=y2;
+draw z4--z3--z2--z1;
+labels(1,2,3,4); endchar;
+
+
+% This definition clips a CM hash symbol, and optionally circles it.
+%
+def apartness_clipped(expr circled,hashed,r_shrink_in) =
+adjust_fit(if monospace:-3u#,-3u# else: 0,0 fi); pickup rule.nib;
+  % symmetry hacks from stmaryrd fonts
+if .5w <> good.x .5w: change_width; fi
+lft x106=hround u-eps; x102=w-x106; y102=math_axis; y108-y102 = .5(x102-x106);
+%lft x106=hround u; x102=w-x106; top y108=h+o; bot y104=-d-o;
+x104=x108=.5[x102,x106]; x101=x103=superness[x104,x102]; x105=x107=superness[x104,x106];
+y102=y106=.5[y104,y108]; y101=y107=superness[y102,y108]; y103=y105=superness[y102,y104];
+
+numeric r_shrink; r_shrink:=r_shrink_in;
+  % symmetry hacks from stmaryrd fonts
+if .5w <> good.x .5w: change_width; fi
+lft x206=hround u+r_shrink-eps; x202=w-x206; y202=math_axis; y208-y202 = .5(x202-x206);
+%lft x206=hround u+r_shrink; x202=w-x206; top y208=h+o-r_shrink; bot y204=-d-o+r_shrink;
+x204=x208=.5[x202,x206]; x201=x203=superness[x204,x202]; x205=x207=superness[x204,x206];
+y202=y206=.5[y204,y208]; y201=y207=superness[y202,y208]; y203=y205=superness[y202,y204];
+
+path p[];
+p1 = z208{right}...z201{z202-z208}...z202{down};
+p2 = z202{down}...z203{z204-z202}...z204{left};
+p3 = z204{left}...z205{z206-z204}...z206{up};
+p4 = z206{up}...z207{z208-z206}...z208{right};
+p0 = z208{right}...z201{z202-z208}...z202{down}...z203{z204-z202}...z204{left}
+...z205{z206-z204}...z206{up}...z207{z208-z206}...cycle; % undrawn circle
+
+if hashed:
+
+% original CM hash, extended and clipped
+
+if monospace: compute_spread(.6x_height#,.7x_height#);
+else: compute_spread(.45x_height#,.55x_height#); fi
+%beginchar("#",18u#,asc_height#,asc_depth#);
+%italcorr (math_axis#+.5(spread#+rule_thickness#))*slant-.5u#;
+%adjust_fit(0,0);
+pickup rule.nib; lft x1=hround 2.5u-eps; x3=x1; x2=x4=w-x1;
+y1=y2; y3=y4; y1-y3=spread; .5[y1,y3]=math_axis;
+z1.1=z1+0.5(z1-z2); z2.1=z2+0.5(z2-z1);
+z3.1=z3+0.5(z3-z4); z4.1=z4+0.5(z4-z3);
+p12 = z1.1--z2.1;
+draw subpath (xpart(p12 intersectiontimes (p3--p4)),
+              xpart(p12 intersectiontimes (p1--p2))) of p12;
+  % upper bar
+p34 = z3.1--z4.1;
+draw subpath (xpart(p34 intersectiontimes (p3--p4)),
+              xpart(p34 intersectiontimes (p1--p2))) of p34;
+  % lower bar
+lft x6=hround 4.5u; rt x7=hround(w-4.5u); x5-x6=x7-x8;
+x8=good.x if monospace: .6 else: .5 fi\\w;
+top y5=top y7=h+eps; bot y6=bot y8=-d-eps;
+y15=y1; z15=whatever[z5,z6]; y36=y3; z36=whatever[z5,z6];
+y27=y2; z27=whatever[z7,z8]; y48=y4; z48=whatever[z7,z8];
+if x5>x6+1:
+  z5.1=z5+0.5(z5-(good.x(x15+.5),y1)); z6.1=z6+0.5(z6-(good.x(x36-.5),y3));
+  p56 = z5.1--(good.x(x15+.5),y1)--(good.x(x15-.5),y1)
+  --(good.x(x36+.5),y3)--(good.x(x36-.5),y3)--z6.1;
+else:
+  z5.1=z5+0.5(z5-z6); z6.1=z6+0.5(z6-z5);
+  p56 = z5.1--z6.1;
+fi;
+draw subpath (xpart(p56 intersectiontimes (p4--p1)),
+              xpart(p56 intersectiontimes (p2--p3))) of p56;
+  % left diagonal
+if x7>x8+1:
+  z7.1=z7+0.5(z7-(good.x(x27+.5),y2)); z8.1=z8+0.5(z8-(good.x(x48-.5),y4));
+  p78 = z7.1--(good.x(x27+.5),y2)--(good.x(x27-.5),y2)
+  --(good.x(x48+.5),y4)--(good.x(x48-.5),y4)--z8.1;
+else:
+  z7.1=z7+0.5(z7-z8); z8.1=z8+0.5(z8-z7);
+  p78 = z7.1--z8.1;
+fi;
+draw subpath (xpart(p78 intersectiontimes (p4--p1)),
+              xpart(p78 intersectiontimes (p2--p3))) of p78;
+  % right diagonal
+            
+fi;
+
+if circled:
+draw z108{right}...z101{z102-z108}...z102{down}...z103{z104-z102}...z104{left}
+...z105{z106-z104}...z106{up}...z107{z108-z106}...cycle; % circle
+fi;
+
+enddef;
+
+
+% APARTNESS RELATION (using definition above)
+% 
+cmchar "The apartness relation";
+% clipped on an invisible smaller circle
+beginchar(oct"102",18u#,asc_height#,desc_depth#); autorounded;
+  apartness_clipped(false,true,1.5u);
+endchar;
+
+% FRESH PRODUCT (using definition above)
+%
+cmchar "The fresh product";
+% clipped on an invisible smaller circle
+beginchar(oct"103",18u#,asc_height#,desc_depth#); autorounded;
+  apartness_clipped(true,true,2.5u);
+endchar;
+
+% (For variants, try adjusting the offset (last parameter to
+% apartness_clipped); this is the gap between the outer and clipping
+% circles.  1.5u in the fresh product is too small; there is not a
+% clear separation between the hash and the circle.  3u works.  But
+% for the apartness relation, a 3u-clipped hash looks weird.
+
+
+% trailer:
+
+if not monospace:
+ skewchar=oct"060"; skew#=.5u#;
+fi;
+bye.
+

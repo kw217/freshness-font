@@ -1,0 +1,53 @@
+\documentclass[10pt]{article}
+
+\usepackage{fresh}
+
+\newcommand{\do}[1]{}
+
+\newcommand{\linei}{
+\do{\forall x \mathrel{.} P(x)}
+\Leftrightarrow \do{\freshquant x \mathrel{.} P(x)}
+\Leftrightarrow \do{\exists x \mathrel{.} P(x)}
+}
+
+\newcommand{\lineii}{
+\do{x\apart y} \quad \Leftrightarrow \quad \do{x\fprod y}
+}
+
+\begin{document}
+
+This is a test.
+
+\renewcommand{\do}[1]{#1}
+\[
+\linei
+\]
+
+\[
+\lineii
+\]
+
+\renewcommand{\do}[1]{Q^{#1}}
+\[
+\linei
+\]
+
+\[
+\lineii
+\]
+
+
+\renewcommand{\do}[1]{Q^{R^{#1}}}
+\[
+\linei
+\]
+
+\[
+\lineii
+\]
+
+
+
+
+
+\end{document}

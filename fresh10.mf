@@ -1,0 +1,6 @@
+if unknown cmbase: input cmbase fi;
+def generate suffix t = enddef;
+input cmsy10;
+slant:= 0;
+design_size := 10;
+input fresh;

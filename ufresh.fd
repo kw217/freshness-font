@@ -1,0 +1,12 @@
+\ProvidesFile{ufresh.fd}
+        [2001/06/05 v1.0 Keith Wansbrough's freshness font]
+\DeclareFontFamily{U}{fresh}{}
+\DeclareFontShape{U}{fresh}{m}{n}{%
+      <5><6><7><8><9><10>gen*fresh%
+      <10.95><12><14.4><17.28><20.74><24.88>fresh10%
+      }{}
+%\DeclareFontShape{U}{fresh}{b}{n}{%
+%      <5><6><7><8><9>gen*freshb%
+%      <10><10.95><12><14.4><17.28><20.74><24.88>freshb10%
+%      }{}
+\endinput
