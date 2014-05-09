@@ -2,7 +2,8 @@ Keith Wansbrough's Freshness Font
 =================================
 
 How to install:
-~~~~~~~~~~~~~~~
+---------------
+
 Just type `make install`, or do the following (for a local install):
 
 * Make the directory `~/texmf/fonts/source/public/fresh/`
@@ -12,7 +13,7 @@ Just type `make install`, or do the following (for a local install):
 
 
 How to use:
-~~~~~~~~~~~
+-----------
 
 ```
 \usepackage{fresh}
