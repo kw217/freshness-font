@@ -1,6 +1,9 @@
 Keith Wansbrough's Freshness Font
 =================================
 
+> Update: I've made this available on github. It's otherwise (so far) unchanged. Feedback welcome!
+> --Keith Wansbrough, 2014-05-09.
+
 How to install:
 ---------------
 
