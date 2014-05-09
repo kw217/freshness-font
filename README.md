@@ -1,7 +1,12 @@
 Keith Wansbrough's Freshness Font
 =================================
 
-> Update: I've made this available on github. It's otherwise (so far) unchanged. Feedback welcome!
+> Update: I've made this available on [github](https://github.com/kw217/freshness-font).
+> It's otherwise (so far) unchanged. Feedback welcome!
+>
+> Here is the [home page of this font](http://www.lochan.org/keith/fresh.html),
+> and here are [Andrew Pitts' pages about Nominal Sets](http://www.cl.cam.ac.uk/~amp12/).
+>
 > --Keith Wansbrough, 2014-05-09.
 
 How to install:
