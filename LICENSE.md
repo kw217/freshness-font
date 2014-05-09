@@ -1,4 +1,4 @@
-fresh.sty
+freshness-font
 
 Copyright 2001 Keith Wansbrough
 
@@ -8,4 +8,4 @@ This work has the LPPL maintenance status `maintained`.
 
 The Current Maintainer of this work is Keith Wansbrough.
 
-This work consists of the files fresh<number>.mf, fresh.mf, fresh.sty, and ufresh.fd, along with the accompanying files Makefile, testfresh.tex, testfresh.pdf, and README.md.
+This work consists of the files fresh{number}.mf, fresh.mf, fresh.sty, and ufresh.fd, along with the accompanying files Makefile, testfresh.tex, testfresh.pdf, and README.md.
